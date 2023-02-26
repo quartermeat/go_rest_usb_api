@@ -18,6 +18,7 @@ import (
 	"github.com/quartermeat/go_rest_usb_api/input"
 	"github.com/quartermeat/go_rest_usb_api/objects"
 	"github.com/quartermeat/go_rest_usb_api/ui"
+	"github.com/quartermeat/go_rest_usb_api/usbAPI"
 )
 
 // App() is the main game function and main loop for a card game.
@@ -60,6 +61,18 @@ func App() {
 
 	consoleToInputChan = make(chan console.ITxTopic, 1)
 	defer close(consoleToInputChan)
+
+	// Start REST API server
+	usbApi, err := usbAPI.NewUSBAPI()
+	if err != nil {
+		panic(err)
+	}
+	go func() {
+		err := usbApi.Start()
+		if err != nil {
+			panic(err)
+		}
+	}()
 
 	// start command server
 	go console.StartServer(consoleToInputChan)

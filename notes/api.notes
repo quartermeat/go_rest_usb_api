@@ -1,5 +1,10 @@
 [2023-02-25]
 Notes:
+- development priority SHALL be using the sim comm(UDP) for easy local development, until hardware portion of usb testing gets squared away
 Ideas:
+- a connection struct will be protocol specific and implement the API 
+- the API interface shall be 
+UDP will be used to test new concepts and will be developed first, so the USB protocol will follow to make up for the sim comm
 TODO:
+[ ] connection struct needs a type attribute that could either be USB or UDP
 Activity Log:
